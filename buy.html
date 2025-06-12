@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout – NexusVision IPTV</title>
+    <meta name="description" content="Complete your NexusVision subscription purchase. Select your plan and contact our team to finalize your order and get instant access.">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+    <!-- AOS (Animate on Scroll) Library CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        /* --- MASTER STYLESHEET FOR BUY PAGE --- */
+        
+        :root {
+            --primary-glow: #00f2ea;
+            --secondary-accent: #d4af37;
+            --bg-dark: #020412;
+            --bg-medium: #0A0F1E;
+            --bg-card: #121A32;
+            --text-light: #E0E5F0;
+            --text-gray: #8892B0;
+            --border-color: rgba(0, 242, 234, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        main { flex-grow: 1; padding: 60px 0; }
+
+        /* Checkout Container */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        /* Left Side: Steps */
+        .checkout-steps {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .step-number {
+            width: 40px; height: 40px;
+            background: var(--bg-medium);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .step-header h2 { font-size: 1.5rem; margin: 0; }
+        
+        /* Plan Selection */
+        .plan-option {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .plan-option:hover { border-color: var(--primary-glow); }
+        .plan-option.selected {
+            border-color: var(--primary-glow);
+            background: rgba(0, 242, 234, 0.05);
+            box-shadow: 0 0 15px rgba(0, 242, 234, 0.1);
+        }
+        .plan-radio {
+            width: 20px; height: 20px; border-radius: 50%;
+            border: 2px solid var(--text-gray); margin-right: 20px;
+            display: flex; justify-content: center; align-items: center;
+            transition: all 0.3s ease;
+        }
+        .plan-option.selected .plan-radio { border-color: var(--primary-glow); }
+        .plan-radio div {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--primary-glow); transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        .plan-option.selected .plan-radio div { transform: scale(1); }
+        .plan-details h4 { font-size: 1.1rem; }
+        .plan-details p { color: var(--text-gray); font-size: 0.9rem; line-height: 1.2; }
+        .plan-price { margin-left: auto; font-size: 1.3rem; font-weight: 700; }
+        .badge {
+            background: var(--secondary-accent); color: var(--bg-dark);
+            padding: 2px 8px; border-radius: 5px; font-size: 0.7rem;
+            font-weight: 700; margin-left: 10px;
+        }
+
+        /* Right Side: Order Summary */
+        .order-summary {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            position: sticky; top: 100px;
+        }
+        .order-summary h3 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+        .summary-item { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-gray); }
+        .summary-item strong { color: var(--text-light); }
+        .summary-total {
+            margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: 700;
+        }
+        .contact-btn {
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            padding: 15px; border-radius: 8px; text-decoration: none;
+            color: var(--text-light); font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s ease; width: 100%; margin-top: 30px;
+        }
+        .contact-btn i { font-size: 1.5rem; }
+        .contact-btn.whatsapp { background-color: #25D366; }
+        .contact-btn:hover { filter: brightness(1.1); transform: scale(1.02); }
+        .trust-badges {
+            margin-top: 20px; text-align: center;
+            color: var(--text-gray); font-size: 0.9rem;
+        }
+        .trust-badges i { color: #25D366; margin-right: 5px; }
+
+        /* Footer */
+        .footer { padding: 40px 0 20px; text-align: center; }
+        .footer a { color: var(--text-gray); text-decoration: none; font-weight: 500; }
+        
+        @media (max-width: 992px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .order-summary { position: static; margin-top: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="container">
+            <div class="checkout-container">
+                <!-- Left Side: Checkout Steps -->
+                <div class="checkout-steps" data-aos="fade-right">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h2>Select Your Plan</h2>
+                    </div>
+                    
+                    <div class="plan-option" data-plan="1 Month Access" data-price="$15">
+                        <div class="plan-radio"><div></div></div>
+                        <div class="plan-details">
+                            <h4>1 Month Pass</h4>
+                            <p>Great for getting started.</p>
+                        </div>
+                        <span class="plan-price">$15</span>
+                    </div>
+
+                    <div class="plan-option" data-plan="3 Month Access" data-price="$36">
+                        <div class="plan-radio"><div></div></div>
+                        <div class="plan-details">
+                            <h4>3 Month Pass</h4>
+                            <p>Save 20% over monthly.</p>
+                        </div>
+                        <span class="plan-price">$36</span>
+                    </div>
+
+                    <div class="plan-option selected" data-plan="12 Month Access (Best Value)" data-price="$96">
+                        <div class="plan-radio"><div></div></div>
+                        <div class="plan-details">
+                            <h4>12 Month Pass <span class="badge">SAVE 45%</span></h4>
+                            <p>Our most popular plan for uninterrupted entertainment.</p>
+                        </div>
+                        <span class="plan-price">$96</span>
+                    </div>
+                </div>
+
+                <!-- Right Side: Order Summary -->
+                <div class="order-summary" data-aos="fade-left">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item">
+                        <span>Plan Selected:</span>
+                        <strong id="summary-plan">12 Month Access</strong>
+                    </div>
+                     <div class="summary-item">
+                        <span>Connections:</span>
+                        <strong id="summary-connections">3 Devices</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Support Level:</span>
+                        <strong id="summary-support">Priority 24/7</strong>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="summary-total">$96.00</span>
+                    </div>
+
+                    <a href="#" id="whatsapp-link" target="_blank" class="contact-btn whatsapp">
+                        <i class="bi bi-whatsapp"></i> Complete on WhatsApp
+                    </a>
+                    
+                    <div class="trust-badges">
+                        <p><i class="bi bi-shield-lock-fill"></i> Secure Manual Checkout</p>
+                        <p><i class="bi bi-lightning-charge-fill"></i> Instant Delivery After Payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <a href="index.html">← Return to Homepage</a>
+    </footer>
+
+    <!-- JS Libraries -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 20,
+        });
+
+        // --- DYNAMIC CHECKOUT LOGIC ---
+        const planOptions = document.querySelectorAll('.plan-option');
+        const summaryPlanEl = document.getElementById('summary-plan');
+        const summaryConnectionsEl = document.getElementById('summary-connections');
+        const summarySupportEl = document.getElementById('summary-support');
+        const summaryTotalEl = document.getElementById('summary-total');
+        const whatsappLink = document.getElementById('whatsapp-link');
+
+        const whatsappNumber = 'YOUR_WHATSAPP_NUMBER'; // IMPORTANT: Replace with your number
+
+        const plans = {
+            "1 Month Access": { price: "$15", connections: "2 Devices", support: "Standard 24/7" },
+            "3 Month Access": { price: "$36", connections: "2 Devices", support: "Standard 24/7" },
+            "12 Month Access (Best Value)": { price: "$96", connections: "3 Devices", support: "Priority 24/7" },
+        };
+
+        function updateSummary(selectedPlanName) {
+            const planData = plans[selectedPlanName];
+            
+            summaryPlanEl.textContent = selectedPlanName.replace(' (Best Value)', '');
+            summaryConnectionsEl.textContent = planData.connections;
+            summarySupportEl.textContent = planData.support;
+            summaryTotalEl.textContent = planData.price;
+
+            const message = `Hello NexusVision! I'm ready to complete my purchase for the *${selectedPlanName}* for *${planData.price}*. Please provide payment details.`;
+            whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        }
+
+        planOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                planOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                const selectedPlanName = option.dataset.plan;
+                updateSummary(selectedPlanName);
+            });
+        });
+
+        // Initialize or update based on URL parameter
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const planParam = urlParams.get('plan');
+            let initialPlanElement = document.querySelector('.plan-option.selected');
+
+            if (planParam) {
+                let targetEl;
+                if (planParam.includes('12')) targetEl = document.querySelector('[data-plan="12 Month Access (Best Value)"]');
+                else if (planParam.includes('3')) targetEl = document.querySelector('[data-plan="3 Month Access"]');
+                else if (planParam.includes('1')) targetEl = document.querySelector('[data-plan="1 Month Access"]');
+                
+                if (targetEl) {
+                    initialPlanElement = targetEl;
+                }
+            }
+            
+            initialPlanElement.click(); // Trigger a click to set the initial state
+        });
+    </script>
+</body>
+</html>
