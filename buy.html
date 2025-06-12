@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Checkout – NexusVision IPTV</title>
-    <meta name="description" content="Complete your NexusVision subscription purchase. Select your plan and contact our team to finalize your order and get instant access.">
+    <meta name="description" content="Securely purchase your NexusVision subscription. Select your plan and contact our team to finalize your order and get instant access.">
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,7 +147,8 @@
             margin-top: 20px; text-align: center;
             color: var(--text-gray); font-size: 0.9rem;
         }
-        .trust-badges i { color: #25D366; margin-right: 5px; }
+        .trust-badges p { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 5px;}
+        .trust-badges i { color: #25D366; }
 
         /* Footer */
         .footer { padding: 40px 0 20px; text-align: center; }
@@ -220,7 +221,7 @@
                         <span id="summary-total">$96.00</span>
                     </div>
 
-                    <a href="#" id="https://wa.me/212674182412" target="_blank" class="contact-btn whatsapp">
+                    <a href="#" id="whatsapp-link" target="_blank" class="contact-btn whatsapp">
                         <i class="bi bi-whatsapp"></i> Complete on WhatsApp
                     </a>
                     
@@ -254,7 +255,8 @@
         const summaryTotalEl = document.getElementById('summary-total');
         const whatsappLink = document.getElementById('whatsapp-link');
 
-        const whatsappNumber = 'https://wa.me/212674182412'; // IMPORTANT: Replace with your number
+        // UPDATED: Your actual WhatsApp number is now here.
+        const whatsappNumber = '212674182412';
 
         const plans = {
             "1 Month Access": { price: "$15", connections: "2 Devices", support: "Standard 24/7" },
