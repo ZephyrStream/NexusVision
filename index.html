@@ -6,15 +6,12 @@
     <title>NexusVision IPTV - Redefining Your Entertainment</title>
     <meta name="description" content="Enter a new era of streaming with NexusVision. 20,000+ live channels, a massive 4K VOD library, and unparalleled stability. Claim your free trial and experience the difference.">
 
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     
-    <!-- AOS (Animate on Scroll) Library CDN -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
@@ -23,13 +20,14 @@
         /* 1. Root Variables & Global Reset */
         :root {
             --primary-glow: #00f2ea;
-            --secondary-accent: #d4af37;
+            --secondary-accent: #d4af37; /* Not used in current CSS, consider if needed */
             --bg-dark: #020412;
             --bg-medium: #0A0F1E;
             --bg-card: #121A32;
             --text-light: #E0E5F0;
             --text-gray: #8892B0;
             --border-color: rgba(0, 242, 234, 0.1);
+            --bg-light: #0A0F1E; /* Defined to match --bg-medium, used in popular pricing card */
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -43,9 +41,10 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* 2. Advanced Background Canvas */
-        #constellation-bg {
+        /* Changed ID to match HTML canvas ID */
+        #bg-canvas { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            cursor: grab;
+            /* Removed cursor: grab as it's not strictly necessary for a background element and might confuse users */
         }
 
         /* 3. Header & Navigation */
@@ -78,7 +77,7 @@
         
         /* 5. Hero Section */
         .hero { height: 100vh; display: flex; align-items: center; text-align: center; }
-        .hero-content { z-index: 1; }
+        .hero-content { z-index: 1; /* Ensure content is above canvas */ }
         .hero h1 {
             font-size: 4.5rem; font-weight: 800; letter-spacing: -2px;
             max-width: 900px; margin: 0 auto 20px auto; line-height: 1.1;
@@ -100,7 +99,11 @@
             border: 1px solid var(--border-color); transition: all 0.4s ease;
             transform-style: preserve-3d; position: relative;
         }
-        .feature-card:hover { transform: perspective(1000px) rotateX(10deg) rotateY(-5deg) scale(1.05); border-color: var(--primary-glow); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .feature-card:hover { 
+            transform: perspective(1000px) rotateX(10deg) rotateY(-5deg) scale(1.05); 
+            border-color: var(--primary-glow); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+        }
         .feature-card .icon { font-size: 2.5rem; color: var(--primary-glow); margin-bottom: 20px; display: block; }
         .feature-card h3 { font-size: 1.5rem; }
         
@@ -132,7 +135,7 @@
         }
         .pricing-card.popular {
             border-color: var(--primary-glow); transform: scale(1.05); position: relative;
-            background: var(--bg-light);
+            background: var(--bg-light); /* Used defined variable */
         }
         .popular-badge {
             position: absolute; top: 20px; left: 50%; transform: translateX(-50%); background: var(--primary-glow);
@@ -178,12 +181,16 @@
             .main-nav { display: none; }
             .features-grid, .pricing-grid, .faq-grid { grid-template-columns: 1fr; }
             .pricing-card.popular { transform: scale(1); }
+            .footer-grid { grid-template-columns: 1fr 1fr; } /* Adjust for medium screens */
+            .footer-col:first-child { grid-column: span 2; } /* Make logo col span 2 */
         }
         @media (max-width: 768px) {
             h2, .hero h1 { font-size: 2.5rem; }
             section { padding: 80px 0; }
             .hero { height: auto; padding: 140px 0 80px 0; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-col:first-child { grid-column: auto; } /* Reset span for small screens */
+            .hero-buttons { flex-direction: column; gap: 15px; } /* Stack buttons on small screens */
         }
     </style>
 </head>
@@ -200,6 +207,7 @@
                 <a href="#faq" class="nav-link">FAQ</a>
             </nav>
             <a href="contact.html" class="btn btn-primary" data-magnetic>Contact Us</a>
+            <button class="menu-toggle" aria-label="Toggle navigation" style="display:none;"><i class="bi bi-list"></i></button>
         </div>
     </header>
 
@@ -252,25 +260,25 @@
                 <div class="content-shelf" data-aos="fade-up">
                     <h3 class="shelf-title">Latest Movie Releases</h3>
                     <div class="poster-row">
-                        <div class="poster-card"><img src="https://fr.web.img3.acsta.net/img/16/9b/169bbcbdb93babc2905e4fab5c8d66d5.jpg" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://fr.web.img6.acsta.net/c_310_420/img/52/ba/52baffc9161c67d10aa89d79dde8ee00.jpg" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSBWL93KrRPxvVVx1eMewVnk48oODetAUtAx_gQ1G268-KuOg5E" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQk0uKHcTKV4EMGoPIlSNXBtguTgJsOx7ZrozgH_pmxPbiZ_gFp" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRBkour_OO8RJQ3rEAoC7bdXb82X9GPHD5z0zwHIPDL-Vyq7VMQ" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQq1jxLjHB6bJ7RQTuoAS54zWK0BSQ0jE_qHnMEIbRpy-rHVpTK" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSjoQJN_b5xYC-LTbllhb9J8Jpmg7Oenk21Lb2vF-KbNZuJzLjT" alt="Poster"></div>
+                        <div class="poster-card"><img src="https://fr.web.img3.acsta.net/img/16/9b/169bbcbdb93babc2905e4fab5c8d66d5.jpg" alt="Movie Poster 1"></div>
+                        <div class="poster-card"><img src="https://fr.web.img6.acsta.net/c_310_420/img/52/ba/52baffc9161c67d10aa89d79dde8ee00.jpg" alt="Movie Poster 2"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSBWL93KrRPxvVVx1eMewVnk48oODetAUtAx_gQ1G268-KuOg5E" alt="Movie Poster 3"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQk0uKHcTKV4EMGoPIlSNXBtguTgJsOx7ZrozgH_pmxPbiZ_gFp" alt="Movie Poster 4"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRBkour_OO8RJQ3rEAoC7bdXb82X9GPHD5z0zwHIPDL-Vyq7VMQ" alt="Movie Poster 5"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQq1jxLjHB6bJ7RQTuoAS54zWK0BSQ0jE_qHnMEIbRpy-rHVpTK" alt="Movie Poster 6"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSjoQJN_b5xYC-LTbllhb9J8Jpmg7Oenk21Lb2vF-KbNZuJzLjT" alt="Movie Poster 7"></div>
                     </div>
                 </div>
                 <div class="content-shelf" data-aos="fade-up">
                     <h3 class="shelf-title">Trending TV Shows</h3>
                     <div class="poster-row">
-                        <div class="poster-card"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQCSPC6OOCwEXosMd2iQYjJEXAUkgu2E3Pt_DDs6fJm2qYv6NvC" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTk9HutA4m6Wdm_PAAyGtBMvw-4fMhu12WUjpnB6U15fy9i-QeW" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDyeUZnRVBFic5PyLlMI3Y_M_a7FOlPuVJl0P8n8hOpAZeiola" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQnIp_MCXMhztxJf4nIyjgUJTbyVAdxeH9rJ5DunQCtO0tqXtev" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTl-57Id5ttPbWr-cxpUNNRSNCSjgTmXZx39zn5KowQyQzxBYvo" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://www.themanual.com/wp-content/uploads/sites/9/2024/03/dMOpdkrDC5dQxqNydgKxXjBKyAc.jpg" alt="Poster"></div>
-                        <div class="poster-card"><img src="https://thingsilike.live/wp-content/uploads/2020/08/game-of-thrones.jpg" alt="Poster"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQCSPC6OOCwEXosMd2iQYjJEXAUkgu2E3Pt_DDs6fJm2qYv6NvC" alt="TV Show Poster 1"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTk9HutA4m6Wdm_PAAyGtBMvw-4fMhu12WUjpnB6U15fy9i-QeW" alt="TV Show Poster 2"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDyeUZnRVBFic5PyLlMI3Y_M_a7FOlPuVJl0P8n8hOpAZeiola" alt="TV Show Poster 3"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQnIp_MCXMhztxJf4nIyjgUJTbyVAdxeH9rJ5DunQCtO0tqXtev" alt="TV Show Poster 4"></div>
+                        <div class="poster-card"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTl-57Id5ttPbWr-cxpUNNRSNCSjgTmXZx39zn5KowQyQzxBYvo" alt="TV Show Poster 5"></div>
+                        <div class="poster-card"><img src="https://www.themanual.com/wp-content/uploads/sites/9/2024/03/dMOpdkrDC5dQxqNydgKxXjBKyAc.jpg" alt="TV Show Poster 6"></div>
+                        <div class="poster-card"><img src="https://thingsilike.live/wp-content/uploads/2020/08/game-of-thrones.jpg" alt="TV Show Poster 7"></div>
                     </div>
                 </div>
             </div>
@@ -285,18 +293,33 @@
                 <div class="pricing-grid">
                     <div class="pricing-card" data-aos="fade-right" data-aos-delay="200">
                         <h3>1 Month</h3><div class="price">$15</div>
-                        <ul><li><i class="bi bi-check-circle-fill"></i> 20,000+ Channels</li><li><i class="bi bi-check-circle-fill"></i> 80,000+ VOD Library</li><li><i class="bi bi-check-circle-fill"></i> 2 Connections</li><li><i class="bi bi-check-circle-fill"></i> 24/7 Standard Support</li></ul>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i> 20,000+ Channels</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 80,000+ VOD Library</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 2 Connections</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 24/7 Standard Support</li>
+                        </ul>
                         <a href="buy.html?plan=1" class="btn btn-secondary">Choose Plan</a>
                     </div>
                     <div class="pricing-card popular" data-aos="fade-up" data-aos-delay="100">
                         <div class="popular-badge">Best Value</div>
                         <h3>12 Months</h3><div class="price">$8<span>/mo</span></div>
-                        <ul><li><i class="bi bi-check-circle-fill"></i> Everything in Basic, plus:</li><li><i class="bi bi-check-circle-fill"></i> <strong>Save over 45% Annually</strong></li><li><i class="bi bi-check-circle-fill"></i> Up to 3 Connections</li><li><i class="bi bi-check-circle-fill"></i> <strong>Priority 24/7 Support</strong></li></ul>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i> Everything in Basic, plus:</li>
+                            <li><i class="bi bi-check-circle-fill"></i> <strong>Save over 45% Annually</strong></li>
+                            <li><i class="bi bi-check-circle-fill"></i> Up to 3 Connections</li>
+                            <li><i class="bi bi-check-circle-fill"></i> <strong>Priority 24/7 Support</strong></li>
+                        </ul>
                         <a href="buy.html?plan=12" class="btn btn-primary">Choose Plan</a>
                     </div>
                     <div class="pricing-card" data-aos="fade-left" data-aos-delay="200">
                         <h3>3 Months</h3><div class="price">$12<span>/mo</span></div>
-                        <ul><li><i class="bi bi-check-circle-fill"></i> Everything in Basic, plus:</li><li><i class="bi bi-check-circle-fill"></i> Save 20% Quarterly</li><li><i class="bi bi-check-circle-fill"></i> 2 Connections</li><li><i class="bi bi-check-circle-fill"></i> 24/7 Standard Support</li></ul>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i> Everything in Basic, plus:</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Save 20% Quarterly</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 2 Connections</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 24/7 Standard Support</li>
+                        </ul>
                         <a href="buy.html?plan=3" class="btn btn-secondary">Choose Plan</a>
                     </div>
                 </div>
@@ -310,12 +333,12 @@
                 </div>
                 <div class="faq-grid">
                     <div class="faq-accordion" data-aos="fade-right">
-                         <div class="faq-item"><button class="faq-question">What devices can I use? <i class="bi bi-plus-lg"></i></button><div class="faq-answer"><p>Our service works on virtually all devices, including Smart TVs, Amazon Firestick, Android TV Boxes, Apple TV, smartphones, tablets, and computers.</p></div></div>
-                         <div class="faq-item"><button class="faq-question">How does the free trial work? <i class="bi bi-plus-lg"></i></button><div class="faq-answer"><p>Simply contact us to request a 24-hour trial. We provide full access to test our service with no obligation or credit card required.</p></div></div>
-                         <div class="faq-item"><button class="faq-question">Is my connection private? <i class="bi bi-plus-lg"></i></button><div class="faq-answer"><p>We do not log user activity. For complete privacy, we always recommend using a trusted VPN, which our service is fully compatible with.</p></div></div>
+                        <div class="faq-item"><button type="button" class="faq-question">What devices can I use? <i class="bi bi-plus-lg"></i></button><div class="faq-answer"><p>Our service works on virtually all devices, including Smart TVs, Amazon Firestick, Android TV Boxes, Apple TV, smartphones, tablets, and computers.</p></div></div>
+                        <div class="faq-item"><button type="button" class="faq-question">How does the free trial work? <i class="bi bi-plus-lg"></i></button><div class="faq-answer"><p>Simply contact us to request a 24-hour trial. We provide full access to test our service with no obligation or credit card required.</p></div></div>
+                        <div class="faq-item"><button type="button" class="faq-question">Is my connection private? <i class="bi bi-plus-lg"></i></button><div class="faq-answer"><p>We do not log user activity. For complete privacy, we always recommend using a trusted VPN, which our service is fully compatible with.</p></div></div>
                     </div>
                     <div class="faq-image" data-aos="fade-left">
-                        <img src="https://www.europe1.fr/lmnr/var/europe1/storage/media/image/2024/10/30/00/le-top-5-des-meilleures-smart-tv-du-marche.jpg?VersionId=N9jFle7ORywseo2hutlVnrufrb5.tWPW" alt="Support" style="width:100%; border-radius:12px;">
+                        <img src="https://www.europe1.fr/lmnr/var/europe1/storage/media/image/2024/10/30/00/le-top-5-des-meilleures-smart-tv-du-marche.jpg?VersionId=N9jFle7ORywseo2hutlVnrufrb5.tWPW" alt="Various smart devices showing entertainment" style="width:100%; border-radius:12px;">
                     </div>
                 </div>
             </div>
@@ -344,20 +367,19 @@
                 </div>
                 <div class="footer-col">
                     <h4>Get In Touch</h4>
-                     <p>For trials, subscriptions, and 24/7 support:</p>
-                     <div class="social-icons">
-                        <a href="#"><i class="bi bi-telegram"></i></a>
-                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    <p>For trials, subscriptions, and 24/7 support:</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 NexusVision. All Rights Reserved.</p>
+                <p>&copy; 2024 NexusVision. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- JS Libraries (GSAP for Magnetic Buttons) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
@@ -376,8 +398,8 @@
         document.querySelectorAll('[data-magnetic]').forEach(el => {
             el.addEventListener('mousemove', function(e) {
                 const pos = this.getBoundingClientRect();
-                const x = e.clientX - pos.left - pos.width / 2;
-                const y = e.clientY - pos.top - pos.height / 2;
+                const x = e.clientX - (pos.left + pos.width / 2); // Corrected calculation
+                const y = e.clientY - (pos.top + pos.height / 2); // Corrected calculation
                 gsap.to(this, { x: x * 0.3, y: y * 0.3, duration: 0.7, ease: "power3.out" });
             });
             el.addEventListener('mouseout', function(e) {
@@ -388,7 +410,7 @@
         // 4. FAQ Accordion Logic
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
+                const faqItem = button.closest('.faq-item'); // Use .closest() for robustness
                 const answer = faqItem.querySelector('.faq-answer');
                 
                 if (faqItem.classList.contains('active')) {
@@ -405,67 +427,106 @@
             });
         });
         
-        // 5. Custom 3D Background Animation Logic
+        // 5. Custom 3D Background Animation Logic (Constellation)
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        
+        // Function to set canvas dimensions
+        function setCanvasDimensions() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasDimensions(); // Initial set
 
         let particlesArray;
-        const mouse = { x: null, y: null, radius: (canvas.height/100) * (canvas.width/100) };
-        window.addEventListener('mousemove', event => { mouse.x = event.x; mouse.y = event.y; });
-        window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+        // Mouse interaction object
+        const mouse = { 
+            x: undefined, 
+            y: undefined, 
+            radius: (canvas.height / 100) * (canvas.width / 100) * 1.5 // Increased radius for better interaction
+        };
+
+        window.addEventListener('mousemove', event => { 
+            mouse.x = event.x; 
+            mouse.y = event.y; 
+        });
+        window.addEventListener('mouseout', () => { 
+            mouse.x = undefined; 
+            mouse.y = undefined; 
+        });
 
         class Particle {
             constructor(x, y, dirX, dirY, size, color) {
-                this.x = x; this.y = y; this.dirX = dirX; this.dirY = dirY;
-                this.size = size; this.color = color;
+                this.x = x; 
+                this.y = y; 
+                this.dirX = dirX; 
+                this.dirY = dirY;
+                this.size = size; 
+                this.color = color || 'rgba(0, 242, 234, 0.5)'; // Default color
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = 'rgba(0, 242, 234, 0.5)'; ctx.fill();
+                ctx.fillStyle = this.color; 
+                ctx.fill();
             }
             update() {
-                if (this.x > canvas.width || this.x < 0) { this.dirX = -this.dirX; }
-                if (this.y > canvas.height || this.y < 0) { this.dirY = -this.dirY; }
-                
-                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                if(distance < mouse.radius + this.size){
-                    if(mouse.x < this.x && this.x < canvas.width - this.size * 10) { this.x += 5; }
-                    if(mouse.x > this.x && this.x > this.size * 10) { this.x -= 5; }
-                    if(mouse.y < this.y && this.y < canvas.height - this.size * 10) { this.y += 5; }
-                    if(mouse.y > this.y && this.y > this.size * 10) { this.y -= 5; }
+                // Bounce off edges
+                if (this.x + this.size > canvas.width || this.x - this.size < 0) { 
+                    this.dirX = -this.dirX; 
                 }
-                this.x += this.dirX; this.y += this.dirY;
+                if (this.y + this.size > canvas.height || this.y - this.size < 0) { 
+                    this.dirY = -this.dirY; 
+                }
+                
+                // Mouse interaction
+                if (mouse.x !== undefined && mouse.y !== undefined) {
+                    let dx = mouse.x - this.x; 
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius + this.size) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius + this.size - distance) / (mouse.radius + this.size); // Stronger force closer
+                        const directionX = forceDirectionX * force;
+                        const directionY = forceDirectionY * force;
+
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    }
+                }
+
+                this.x += this.dirX; 
+                this.y += this.dirY;
                 this.draw();
             }
         }
         
         function init() {
             particlesArray = [];
-            let numParticles = (canvas.height * canvas.width) / 9000;
-            for(let i=0; i < numParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * (innerWidth - size * 2));
-                let y = (Math.random() * (innerHeight - size * 2));
-                let dirX = (Math.random() * 0.4) - 0.2;
-                let dirY = (Math.random() * 0.4) - 0.2;
+            // Adjusted number of particles for better density on various screen sizes
+            let numParticles = (canvas.width * canvas.height) / 10000; // Increased density
+            for(let i = 0; i < numParticles; i++) {
+                let size = (Math.random() * 2) + 1; // Particles between 1 and 3px
+                let x = (Math.random() * (canvas.width - size * 2)) + size; // Ensure particles start within bounds
+                let y = (Math.random() * (canvas.height - size * 2)) + size; // Ensure particles start within bounds
+                let dirX = (Math.random() * 0.4) - 0.2; // Slower movement
+                let dirY = (Math.random() * 0.4) - 0.2; // Slower movement
                 particlesArray.push(new Particle(x, y, dirX, dirY, size));
             }
         }
 
         function connect(){
-            let opacityValue = 1;
+            let maxConnectionDistance = (canvas.width / 8) * (canvas.height / 8); // Adjusted for responsiveness
             for(let a = 0; a < particlesArray.length; a++){
                 for(let b = a; b < particlesArray.length; b++){
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) 
-                                + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if(distance < (canvas.width/7) * (canvas.height/7)){
-                        opacityValue = 1 - (distance/20000);
+                    let distanceSquared = Math.pow(particlesArray[a].x - particlesArray[b].x, 2) + Math.pow(particlesArray[a].y - particlesArray[b].y, 2);
+                    
+                    if(distanceSquared < maxConnectionDistance){
+                        let opacityValue = 1 - (distanceSquared / maxConnectionDistance); // Fade lines based on distance
                         ctx.strokeStyle='rgba(0, 242, 234,' + opacityValue + ')';
-                        ctx.lineWidth=1;
+                        ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                         ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
@@ -477,19 +538,39 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            ctx.clearRect(0,0,innerWidth, innerHeight);
-            for(let i=0; i<particlesArray.length; i++){ particlesArray[i].update(); }
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Use canvas.width/height
+
+            for(let i = 0; i < particlesArray.length; i++){ 
+                particlesArray[i].update(); 
+            }
             connect();
         }
 
         window.addEventListener('resize', () => {
-            canvas.width = innerWidth; canvas.height = innerHeight;
-            mouse.radius = (canvas.height/100) * (canvas.width/100);
-            init();
+            setCanvasDimensions(); // Update canvas dimensions on resize
+            mouse.radius = (canvas.height / 100) * (canvas.width / 100) * 1.5; // Recalculate mouse radius
+            init(); // Reinitialize particles on resize
         });
         
         init();
         animate();
+
+        // 6. Responsive Navigation Toggle (for smaller screens)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+
+        if (menuToggle) { // Check if the toggle button exists
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active'); // Toggle a class to show/hide the menu
+            });
+
+            // Close menu when a nav link is clicked (on mobile)
+            mainNav.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                });
+            });
+        }
     </script>
 </body>
 </html>
